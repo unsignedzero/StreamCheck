@@ -1,0 +1,223 @@
+---------------------------------------------------------------
+| -- START OF FILE -- -- START OF FILE -- -- START OF FILE -- |
+---------------------------------------------------------------
+---------------------------------------------------------------
+StreamCheck 
+FileList:
+-SC.h
+-SC.cpp
+Verison 0.1.4.1
+Built in C++ 
+Created by unsignedzero
+
+64CR(64 character per line plus carriage return)
+
+Please READ THIS TEXT FILE BEFORE ASKING QUESTIONS! If this 
+file is incomplete, please go to, .... and download 
+the file again, or read it there. 
+
+Abstract:
+The purpose of this code is to fix bad input streams due to a 
+malformed input, ie entering in a letter when asking for an 
+integer. This code currently fixes std::cin, std::istream and 
+std::ifstream. Additional support for other input may be added 
+in the future. The functions are located in ZX namespace.
+---------------------------------------------------------------
+---------------------------------------------------------------
+
+ - Table of Contents
+ - - Use Ctrl/Cmd + F to jump to certain part of this text
+ - - using the characters between the [ and ].
+
+ -  (0*) Information
+ - - 00 [Adin] Additional Information
+ - - 01 [DEBG] Debug Information
+ - - 02 [ZLNK] ZX File Linking
+
+ -  (A*) Functions 
+ - - A0 [0SC0] StreamCheck
+ - - A1 [0SR0] StreamRecovery
+ - - A2 [0SF0] StreamFix
+
+ -  (Z*) End Information
+ - - Z0 [ABUT] About 
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+ -  (0*) Information
+---------------------------------------------------------------
+ - - 00 [Adin] Additional Information
+
+This code currently has three different unique functions, with 
+many different aliases for them. The shortened calling name 
+for each function will be just the capital letters. So for 
+Function A, StreamCheck() becomes SC(), with the correct 
+arguments in the parentheses.
+
+Remember that the functions are placed in zx namespace so add
+"zx::" in front of the function name, when calling it, OR add
+"using namespace zx;" AFTER including the file with 
+#include "SC.h"
+
+The first argument for each function, this text will refer to 
+this input as std::input, is their input stream. In the case 
+of std::cin this is omitted! That is to stay, std::input does 
+not need to be entered AND the second argument of that 
+function becomes the first argument. The third argument 
+becomes the second argument and so on. Adding std::cin as the 
+first argument OR anything else for that matter WILL CREATE 
+AN ERROR!
+
+All functions, and their aliases, support const inputs WHERE 
+appropriate. This is true with input-only arguments. Using 
+const with std::input or output-only arguments and 
+input-output arguments does NOT make any sense. Please
+see 01 [DEBG] Debug Information to use this functionality!
+
+This program DOES support classes (and their pointers) as 
+argument with additional requirements for the class, being 
+used as an argument. [NOTE:Current this is being tested! Use at 
+your own risk!]
+
+---------------------------------------------------------------
+ - - 01 [DEBG] Debug Information
+
+This code has debug information that can be turned on/off when 
+compiling. The defines MUST BE ENTERED before including SC.H!
+Entering it in AFTER MAY HAVE unexpected results, depending on 
+the compiler. Remember that defines are case-sentative!
+
+Support for constants are input arguments can be turned on by 
+setting ZX_SC_CONST to true with a 
+"#define ZX_SC_CONST true".
+[BY default this is set to false!] 
+
+Additional debug information about what each function is doing  
+can be turned on by setting ZX_SC_DEBUG to true with a 
+"#define ZX_SC_DEBUG true".
+[BY default this is set to false!]
+
+---------------------------------------------------------------
+ - - 02 [ZLNK] ZX File Linking
+
+This code can be linked with other files created by Zesler to 
+get additional functional from those files. ERRORS may result 
+IF these files ARE INCLUDED after this code! For more 
+information on file linking go to .....
+
+Currently this program can be linked to:
+
+ - ZOS 
+ - - To pause correctly regardless on the OS this code is 
+ - - compiled on 
+
+---------------------------------------------------------------
+ -  (A*) Functions 
+---------------------------------------------------------------
+ - - A0 [0SC0] StreamCheck
+
+Function:
+void zx::StreamCheck
+( std::input stream );
+
+This is the simpliest function of the SC series. This checks
+if stream is bad and clears it, if it is. 
+
+-PreCondition:
+Initialized stream passed
+
+-PostCondition:
+The stream with a bad flag is fixed.
+
+!WARNING:Sending unitialized streams MAY HAVE unexpected 
+results!
+
+---------------------------------------------------------------
+ - - A1 [0SR0] StreamRecovery
+
+Function:
+void zx::StreamRecover
+( std::input stream, std::string& error );
+
+In addition to recovering std::input, this function also sends 
+the bad input into std::string&. std::string* may be used in 
+place of std::string&.
+
+-PreCondition:
+Initialized stream and initialized std::string 
+deference/pointer address passed.
+
+Safety:If a NULL std::string pointer is passed, 
+the function will initialize it and link it to a std::string.
+
+-PostCondition:
+The stream with a bad flag is fixed and the bad input is moved 
+into error. In the case where there is no problem, error is 
+NOT changed!
+
+!Warning:Sending uninitialized pointers and/or streams MAY 
+HAVE unexpected results!
+
+---------------------------------------------------------------
+ - - A2 [0SF0] StreamFix
+
+Function:
+void template <class type> 
+zx::StreamFix( std::input stream, type& var , type defaultval);
+
+In addition to fixing std::input, this function also has a 
+default value set to type&, from type, if a bad input is 
+sent. A type* may be used in place of type.
+
+-PreCondition:
+Initialized stream, initialized var deference/address and 
+initialized defaultval is passed.
+(Note: type cannot be a struct! )
+
+Safety:If a NULL type var is passed, the function is 
+initialized and linked to var. 
+
+-PostCondition:
+The stream with a bad flag is fixed and a var now has the 
+value of defaultval , if the stream had a bad flag to begin 
+with.
+
+!Warning:Sending uninitialized pointers and/or streams MAY 
+HAVE unexpected results! If defaultval is NOT initialize, var
+will RECEIVE a GARBAGE VALUE!
+
+&Class Support:
+
+[NOTE:Current this is being tested! Use at your own risk!]
+This function can support classes as arguments for defaultval
+and var IF the following conditions below are met.
+
+1   ) A default argumentless constructor exists for the class
+2   ) The operator = is overloaded and defined correctly.
+3a* ) The operator << is overloaded and defined correctly and
+3b* ) is friends with ostream (std::cout)
+
+3a and 3b may be omitted if ZX_SC_DEBUG is set to false. 
+
+---------------------------------------------------------------
+ -  (Z*) End Information
+---------------------------------------------------------------
+ - - Z0 [ABUT] About 
+
+This program is created by unsignedzero so that the stream 
+would work if a certain someone entered a letter when a 
+program asked for an interger. 
+
+Original Project Name:FishingStream
+Started:February 07, 2011 
+Created by unsignedzero
+Built in C++ on Code::Blocks V8.02 Unicode
+
+For more information see ...
+You may contact me via email (unsignedzero@gmail.com) if you
+have any suggestions and comments. I DON'T check it daily.
+
+---------------------------------------------------------------
+---------------------------------------------------------------
+|  -- END OF FILE --   -- END OF FILE --   -- END OF FILE --  |
+---------------------------------------------------------------

@@ -1,0 +1,22 @@
+This program was originally created to fix bad streams 
+due to malformed inputs.
+
+Version 0.1.0.0 - 02-08-2011 - Platform
+All Functionality Works (with std:cin and std::ifstream )
+Aliases Function Names Created
+
+Version 0.1.1.0 - 02-27-2011 - Structure
+Additional Support for non-pointer const inputs added
+
+Version 0.1.3.0 - 02-28-2011 -
+Additional Support for other istreams work
+Additional Support for pointer const inputs added
+README.txt created
+
+Version 0.1.4.0 - 03-18-2011
+Code optimized with defines and error prompt created
+
+Version 0.1.4.1 - 05-27-2011
+Constants now in ZX_SC_ space to avoid conflicts.
+Template functions are now in their own header.
+Code now on GIT.
