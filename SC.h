@@ -1,6 +1,6 @@
 //Created by David Tran (UnsignedZero)
 //for the simple purpose of stream checking
-//Verison 0.1.4.1
+//Verison 0.1.4.1 Build 2
 
 /* This program was built so that
  * it could check if a stream is down.
@@ -35,6 +35,10 @@
 #include <string>
 
 namespace zx{
+
+#if(ZOS_H==false)
+ void OSP( int );
+#endif
 
 #ifndef ZOS_H
  #define ZOS_H false

@@ -1,6 +1,6 @@
 //Created by David Tran (UnsignedZero)
 //for the simple purpose of stream checking
-//Verison 0.1.4.1
+//Verison 0.1.4.1 Build 2
 
 #ifndef SC_H
  #include "SC.H"
